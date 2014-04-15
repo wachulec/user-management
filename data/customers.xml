@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<customers>
+    <customer>
+        <customers_id>1</customers_id>
+        <firstname>Mateusz</firstname>
+        <lastname>Flak</lastname>
+        <email>mateusz.flak@domena.pf</email>
+        <phone>+48555666333</phone>
+    </customer>
+    <customer>
+        <customers_id>2</customers_id>
+        <firstname>Aneta</firstname>
+        <lastname>Tucznio</lastname>
+        <email>aneta.tucznio@domena.pf</email>
+        <phone>+48555666333</phone>
+    </customer>
+    <customer>
+        <customers_id>3</customers_id>
+        <firstname>Anna</firstname>
+        <lastname>Bartocha</lastname>
+        <email>anna.bartocha@domena.pf</email>
+        <phone>+48555666333</phone>
+    </customer>
+    <customer>
+        <customers_id>4</customers_id>
+        <firstname>Filip</firstname>
+        <lastname>Werstler</lastname>
+        <email>filip.werstler@domena.pf</email>
+        <phone>+48555666333</phone>
+    </customer>
+    <customer>
+        <customers_id>5</customers_id>
+        <firstname>Kamil</firstname>
+        <lastname>Filipowski</lastname>
+        <email>kamil.filipowski@domena.pf</email>
+        <phone>+48555666333</phone>
+    </customer>
+    <customer>
+        <customers_id>6</customers_id>
+        <firstname>Karol</firstname>
+        <lastname>Jurczyk</lastname>
+        <email>karol.jurczyk@domena.pf</email>
+        <phone>+48555666333</phone>
+    </customer>
+</customers>

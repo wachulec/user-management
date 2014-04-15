@@ -1,0 +1,1 @@
+C:\xampp\php\php.exe -f insert_customers.php

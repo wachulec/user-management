@@ -1,0 +1,103 @@
+<div class="grid_16">
+    <h2 id="page-heading">Klienci</h2>
+</div>
+<?= $this->render('templates/navigation.phtml'); ?>   
+
+<div class="grid_7" style="<?= is_null($this->customer['customers_id']) ? 'display: none' : '' ?>">
+    <div class="box">
+        <h2>
+            <a href="#" id="toggle-articles">Szczegóły</a>
+        </h2>
+        <div class="block" id="articles">
+            <div class="first article">
+                <div class="sixteen_column section">
+                    <div class="sixteen column">
+                        <div class="column_content">
+                            <a href="#" class="image">
+                                <img src="<?= $this->baseUrl('img/photo_60x60.jpg') ?>" width="60" height="60" alt="photo" />
+                            </a>
+                            <h3>
+                                <a href="#"><?= $this->customer['firstname']." ".$this->customer['lastname'] ?></a>
+                            </h3>
+                            <h4><?= $this->customer['type'] ?></h4>
+                            <p class="meta"><?= $this->customer['province'].", ".$this->customer['city'] ?> — Data urodzenia: <?= date("jS F Y",mktime(0,0,0,$this->customer['month'],$this->customer['day'],$this->customer['year'])) ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sixteen_column section">
+                    <div class="five column">
+                        <div class="column_content">
+                            <h5><strong>Dane Kontaktowe</strong></h5>
+                            <p><strong>Imię:</strong> <?= $this->customer['firstname'] ?></p>
+                            <p><strong>Nazwisko:</strong> <?= $this->customer['lastname'] ?></p>
+                            <p><strong>Telefon:</strong> <?= $this->customer['phone'] ?></p>
+                            <p><strong>Email:</strong> <?= $this->customer['email'] ?></p>
+                        </div>
+                    </div>
+                    <div class="eleven column">
+                        <div class="column_content">
+                            <h5><strong>Pozostałe dane</strong></h5>
+                            <p>Np profil DB, adres, tagi, notatki, ilość dni skzoleniowych, status, zainteresowania i różne duperele</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clear"></div>
+<div class="grid_16">
+    <div class="box">
+        <h2>
+            <a href="#" id="toggle-list">Lista klientów</a>
+        </h2>
+        <div class="block" id="list">					
+            <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+                <thead>
+                    <tr>
+                        <th width="5%">Lp.</th>
+                        <th width="2%">Więcej</th>
+                        <th>Nazwisko</th>
+                        <th>Imię</th>
+                        <th>email</th>
+                        <th>Telefon</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Lp.</th>
+                        <th>Imię</th>
+                        <th>Nazwisko</th>
+                        <th>email</th>
+                        <th>Telefon</th>
+                </tfoot>
+                <tbody>
+                    <?php foreach($this->customers as $customer){ ?>
+                    <tr>
+                        <td class="center"><?= $customer['customers_id']; ?></td>
+                        <td class="icons ui-state-default ui-corner-all center" title="Pokaż szczegóły">
+                            <a href="<?= 
+                                    $this->url(
+                                            array(
+                                                'controller'=>'customers',
+                                                'action'=>'list',
+                                                'customers_id'=>$customer['customers_id']
+                                            ),
+                                            'default'
+                                        )
+                                ?>"><span style="position: relative; left: 30%" class="ui-icon ui-icon-gear"></span></a>
+                        </td>
+                        <td><?= $customer['lastname'] ?></td>
+                        <td><?= $customer['firstname'] ?></td>
+                        <td><?= $customer['email'] ?></td>
+                        <td><?= $customer['phone'] ?></td>
+                    </tr>
+                    <?php }//koniec pętli ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>				
+<div class="clear"></div>

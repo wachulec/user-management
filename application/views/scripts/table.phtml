@@ -1,0 +1,48 @@
+<h2>
+    <a href="#" id="toggle-list">Lista klientów</a>
+</h2>
+<div class="block" id="list">					
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+        <thead>
+            <tr>
+                <th width="5%">Lp.</th>
+                <th width="2%">Więcej</th>
+                <th>Nazwisko</th>
+                <th>Imię</th>
+                <th>email</th>
+                <th>Telefon</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Lp.</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>email</th>
+                <th>Telefon</th>
+        </tfoot>
+        <tbody>
+            <?php foreach($this->customers as $customer){ ?>
+            <tr>
+                <td class="center"><?= $customer['customers_id']; ?></td>
+                <td class="icons ui-state-default ui-corner-all center" title="Pokaż szczegóły">
+                    <a href="<?= 
+                            $this->url(
+                                    array(
+                                        'controller'=>'customers',
+                                        'action'=>'details',
+                                        'customers_id'=>$customer['customers_id']
+                                    ),
+                                    'default'
+                                )
+                        ?>"><span style="position: relative; left: 30%" class="ui-icon ui-icon-search"></span></a>
+                </td>
+                <td><?= $customer['lastname'] ?></td>
+                <td><?= $customer['firstname'] ?></td>
+                <td><?= $customer['email'] ?></td>
+                <td><?= $customer['phone'] ?></td>
+            </tr>
+            <?php }//koniec pętli ?>
+        </tbody>
+    </table>
+</div>

@@ -45,6 +45,18 @@
                             <p><strong>Nazwisko:</strong> <?= $this->customer['lastname'] ?></p>
                             <p><strong>Telefon:</strong> <?= $this->customer['phone'] ?></p>
                             <p><strong>Email:</strong> <?= $this->customer['email'] ?></p>
+                            <br>
+                            <br>
+                            <a href="
+                               <?=
+                                $this->url(
+                                            [
+                                                'action'=>'edit',
+                                                'customers_id'=>$this->customer['customers_id']
+                                            ]
+                                        );
+                               ?>
+                               ">Edytuj</a>
                         </div>
                     </div>
                     <div class="eleven column">
@@ -53,9 +65,9 @@
                                 <div class="sixteen_column section">
                                     <div class="sixteen column">
                                         <div class="column_content">
-                                            <p><strong>Profil DB: </strong></p>
-                                            <p><strong>Dni szkoleniowych: </strong></p>
-                                            <p><strong>NIP: </strong></p>
+                                            <p><strong>Profil DB: </strong> <?= $this->customer['wd_profile'] ?></p>
+                                            <p><strong>Dni szkoleniowych: </strong> <?= $this->customer['training_days'] ?></p>
+                                            <p><strong>NIP: </strong> <?= $this->customer['NIP'] ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -65,9 +77,17 @@
                                     <div class="eight column">
                                         <div class="column_content">
                                             <label><strong>Przypisane tagi: </strong></label><br>
-                                            <span class="tag"><span>Leadership&nbsp;&nbsp;</span></span>
-                                            <span class="tag"><span>Inteligencja Emocjonalna&nbsp;&nbsp;</span></span>
-                                            <span class="tag"><span>$$$&nbsp;&nbsp;</span></span>
+                                            <?php
+                                                if($this->c_tags[0]==''){
+                                                    echo "brak przypisanych tagów.";
+                                                }else{
+                                                    foreach($this->c_tags as $tag){
+                                            ?>                                            
+                                                    <span class="tag"><span><?= $tag ?>&nbsp;&nbsp;</span></span>
+                                            <?php
+                                                    }//end foreach
+                                                }//end else
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="eight column">

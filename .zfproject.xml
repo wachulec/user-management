@@ -26,11 +26,14 @@
           <actionMethod actionName="index"/>
           <actionMethod actionName="list"/>
           <actionMethod actionName="details"/>
+          <actionMethod actionName="edit"/>
+          <actionMethod actionName="update"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Test"/>
         <formFile formName="AddTags"/>
+        <formFile formName="EditCustomer"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
@@ -70,6 +73,12 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Customers">
             <viewScriptFile forActionName="details"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Customers">
+            <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Customers">
+            <viewScriptFile forActionName="update"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

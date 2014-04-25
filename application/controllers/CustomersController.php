@@ -34,20 +34,40 @@ class CustomersController extends Zend_Controller_Action
         $customer_id=$this->getRequest()->getParam('customers_id');
         $this->view->title="Edycja";
         $Customer=new Application_Model_DbTable_Customers();
-        $obj=$Customer->fin($customer_id)->current();
+        $obj=$Customer->find($customer_id)->current();
         if(!$obj){
             throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu dla wybranego klienta!', 404);
         }
         $this->view->form=new Application_Form_EditCustomer();
         $this->view->form->populate($obj->toArray());
         $url=$this->view->url(['action'=>'update','customer_id'=>$customer_id]);
-        $this->view->form=setAction($url);
+        $this->view->form->setAction($url);
         $this->view->object=$obj;
     }
 
     public function updateAction()
     {
-        // action body
+        $customer_id=$this->getRequest()->getParam('customers_id');
+        $Customer=new Application_Model_DbTable_Customers();
+        $obj=$Customer->find($customer_id)->current();
+        if(!$obj){
+            throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu dla wybranego klienta!', 404);
+        }
+        
+        if($this->getRequest()->isPost()) {
+            $form=new Application_Form_EditCustomer();
+            if($form->isValid($this->getRequest()->getPost())){
+                $data=$form->getValues();
+                $obj->setFromArray($data);
+                $obj->save();
+                return $this->_helper->redirector(
+                        'edit','customers',null,array('customers_id'=>$customer_id)
+                        );
+            }
+            $this->view->form=$form;
+        }else{
+            throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu wybranego klienta', 404);
+        }
     }
 
 

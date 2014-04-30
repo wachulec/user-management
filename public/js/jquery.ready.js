@@ -82,5 +82,25 @@ $(function(){
         },function(){
             $(this).removeClass('ui-state-hover');
         });
+        
+        $('#dialog_link').click(function(e){
+            var str='';
+            var data='';
+            var url=$('#tags_update_url').val();
+            $('#tags_input_tagsinput .tag').each(function(index, item){
+                str+=$(item).children().html().substring(0,$(item).children().html().indexOf('&nbsp;'))+'.';
+            });
+            data='data='+str.substring(0,str.length-1);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data
+                //beforeSend, error, success, complete - do wypełnienia
+            });
+            //1. wysłanie danych do skryptu
+            //2. odebranie danych z powrotem i wpisanie ich do diva z tagami
+            //3. wyczyszczenie tags_input_tagsinput z tagów
+            //console.log(data.substring(0,data.length-1));
+        });
 
 });

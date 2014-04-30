@@ -1,5 +1,5 @@
 <div class="grid_16">
-    <h2 id="page-heading">Detale</h2>
+    <h2 id="page-heading"><?= $this->title; ?></h2>
 </div>
 <?= $this->render('templates/navigation.phtml'); ?>   
 
@@ -93,6 +93,7 @@
                                     <div class="eight column">
                                         <div class="column_content">
                                             <label><strong>Dodaj tagi: </strong></label>
+                                            <input type="hidden" id="tags_update_url" name="tags_update_url" value="<?= $this->tags_update_url; ?>" />
                                             <input type="text" name="tags" id="tags_input" value="" />
                                         </div>
                                     </div>
@@ -104,7 +105,7 @@
                                   </div>
                                   <div class="six column">
                                       <div class="column_content">
-                                          <a href="#" id="dialog_link" class="ui-state-default ui-corner-some floatRight"><span class="ui-icon ui-icon-disk"></span>Save Info</a>
+                                          <a href="#" id="dialog_link" class="ui-state-default ui-corner-some floatRight"><span class="ui-icon ui-icon-disk"></span>Zapisz!</a>
                                       </div>
                                   </div>
                                 </div>

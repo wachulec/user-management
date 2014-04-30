@@ -1,5 +1,5 @@
 <div class="grid_16">
-    <h2 id="page-heading">Edycja</h2>
+    <h2 id="page-heading"><?= $this->title; ?></h2>
 </div>
 <?= $this->render('templates/navigation.phtml'); ?>
 
@@ -76,6 +76,16 @@
                     <div class="sixteen_column section">
                         <div class="eight column"> 
                             <div class="column_content">
+                                <a href="
+                                    <?=
+                                     $this->url(
+                                                 [
+                                                     'action'=>'details',
+                                                     'customers_id'=>$this->object['customers_id']
+                                                 ]
+                                             );
+                                    ?>
+                                    ">Wróć</a>
                             </div>                            
                         </div>
                         <div class="eight column"> 

@@ -28,17 +28,19 @@
           <actionMethod actionName="details"/>
           <actionMethod actionName="edit"/>
           <actionMethod actionName="update"/>
+          <actionMethod actionName="updatetags"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
-        <formFile formName="Test"/>
-        <formFile formName="AddTags"/>
         <formFile formName="EditCustomer"/>
+        <formFile formName="AddTags"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
         <dbTableDirectory>
           <dbTableFile dbTableName="Customers"/>
+          <dbTableFile dbTableName="Tags"/>
+          <dbTableFile dbTableName="CustomersHasTags"/>
         </dbTableDirectory>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
@@ -79,6 +81,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Customers">
             <viewScriptFile forActionName="update"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Customers">
+            <viewScriptFile forActionName="updatetags"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

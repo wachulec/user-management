@@ -27,6 +27,7 @@ class CustomersController extends Zend_Controller_Action
         $customer_id=$this->getRequest()->getParam('customers_id');
         $this->view->customer=$this->view->customers->getRow($customer_id-1);
         $this->view->c_tags=explode('.',$this->view->customer['tags']);
+        $this->view->tags_update_url=$this->view->url(['action'=>'updatetags','customer_id'=>$customer_id]);
     }
 
     public function editAction()
@@ -70,5 +71,32 @@ class CustomersController extends Zend_Controller_Action
         }
     }
 
+    public function updatetagsAction()
+    {
+        $customer_id=$this->getRequest()->getParam('customers_id');
+        $Customer=new Application_Model_DbTable_Customers();
+        $obj=$Customer->find($customer_id)->current();
+        if(!$obj){
+            throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu dla wybranego klienta!', 404);
+        }
+        
+        if(true/*$this->getRequest()->isPost()*/) {
+            $data="klient.finanse";//$this->getRequest()->getParam('data');
+            $tags=explode('.',$data);
+            $Tags=new Application_Model_DbTable_Tags();
+            //$existTags=$Tags->fetchAll();
+            foreach($tags as $tag){
+                $query=$Tags->select()->where('name LIKE ?', $tag);
+            }
+            
+            
+        }else{
+            throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu wybranego klienta', 404);
+        }
+    }
+
 
 }
+
+
+

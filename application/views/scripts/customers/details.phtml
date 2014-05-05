@@ -78,7 +78,7 @@
                                         <div class="column_content">
                                             <label><strong>Przypisane tagi: </strong></label><br>
                                             <?php
-                                                if($this->c_tags[0]==''){
+                                                if(count($this->c_tags)==0){
                                                     echo "brak przypisanych tagów.";
                                                 }else{
                                                     foreach($this->c_tags as $tag){

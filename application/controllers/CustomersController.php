@@ -26,8 +26,15 @@ class CustomersController extends Zend_Controller_Action
         //...dla konkretnego rekordu
         $customer_id=$this->getRequest()->getParam('customers_id');
         $this->view->customer=$this->view->customers->getRow($customer_id-1);
-        $this->view->c_tags=explode('.',$this->view->customer['tags']);
+        $rowsArray=$this->view->customer->findDependentRowset('Application_Model_DbTable_CustomersHasTags')->toArray();        
+        $c_tags=array();
+        foreach($rowsArray as $row){
+            $c_tags[]=(new Application_Model_DbTable_Tags())->find($row['tag_id'])->current()['name'];
+        }
+        $this->view->c_tags=$c_tags;      
         $this->view->tags_update_url=$this->view->url(['action'=>'updatetags','customer_id'=>$customer_id]);
+        
+        
     }
 
     public function editAction()
@@ -80,22 +87,37 @@ class CustomersController extends Zend_Controller_Action
             throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu dla wybranego klienta!', 404);
         }
         
-        if(true/*$this->getRequest()->isPost()*/) {
-            $data="klient.finanse";//$this->getRequest()->getParam('data');
+        if($this->getRequest()->isPost()) {
+            $data=$this->getRequest()->getParam('data');
             $tags=explode('.',$data);
             $Tags=new Application_Model_DbTable_Tags();
-            //$existTags=$Tags->fetchAll();
+            //W foreachu dodaje nieistniejące jeszcze w słowniku tagi
             foreach($tags as $tag){
                 $query=$Tags->select()->where('name LIKE ?', $tag);
-            }
-            
-            
+                $result=$Tags->fetchRow($query);
+                if($result==null){
+                    $row = [
+                        'name'=>$tag
+                    ];
+                    $tagsId=$Tags->insert($row);                    
+                }else{
+                    $tagsId=$result->tags_id;
+                }
+                $CustomersHasTags=new Application_Model_DbTable_CustomersHasTags();
+                $q=$CustomersHasTags->select()->where('tag_id=?',$tagsId)->where('customer_id=?',$customer_id);
+                $r=$CustomersHasTags->fetchRow($q);
+                if($r==null){   
+                    $relation=[
+                        'tag_id'=>$tagsId,
+                        'customer_id'=>$customer_id
+                    ];
+                    $CustomersHasTags->createRow($relation)->save();
+                }
+            }                                    
         }else{
             throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu wybranego klienta', 404);
         }
     }
-
-
 }
 
 

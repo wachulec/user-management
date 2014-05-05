@@ -79,7 +79,12 @@ class CustomersController extends Zend_Controller_Action
     }
 
     public function updatetagsAction()
-    {
+    { 
+        //blokuje Layout żeby móc klorzystać z jsona
+        $this->getHelper('Layout')->disableLayout();
+        $this->getHelper('ViewRenderer')->setNoRender();       
+        $this->getResponse()->setHeader('Content-Type', 'application/json');
+       
         $customer_id=$this->getRequest()->getParam('customers_id');
         $Customer=new Application_Model_DbTable_Customers();
         $obj=$Customer->find($customer_id)->current();
@@ -89,9 +94,14 @@ class CustomersController extends Zend_Controller_Action
         
         if($this->getRequest()->isPost()) {
             $data=$this->getRequest()->getParam('data');
-            $tags=explode('.',$data);
+            if(!empty($data)) {
+                $tags=explode('.',$data);
+            } else{
+                $tags=null;
+            }
             $Tags=new Application_Model_DbTable_Tags();
             //W foreachu dodaje nieistniejące jeszcze w słowniku tagi
+            $addedTags=array();
             foreach($tags as $tag){
                 $query=$Tags->select()->where('name LIKE ?', $tag);
                 $result=$Tags->fetchRow($query);
@@ -112,8 +122,11 @@ class CustomersController extends Zend_Controller_Action
                         'customer_id'=>$customer_id
                     ];
                     $CustomersHasTags->createRow($relation)->save();
+                    $addedTags[]=$tag;
                 }
-            }                                    
+            }
+            //zwaracam wyniki w formacie json w zapytaniu ajax w obsłudze kliknięcia linku #dialog_link (jquery.ready.js)
+            echo json_encode($addedTags);
         }else{
             throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu wybranego klienta', 404);
         }

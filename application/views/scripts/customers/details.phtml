@@ -75,11 +75,11 @@
                             <form name="tags_form" action="#" method="post">
                                 <div class="sixteen_column section">
                                     <div class="eight column">
-                                        <div class="column_content">
+                                        <div class="column_content tags_box">
                                             <label><strong>Przypisane tagi: </strong></label><br>
                                             <?php
                                                 if(count($this->c_tags)==0){
-                                                    echo "brak przypisanych tagów.";
+                                                    echo "<p class='lack_of_tags'>brak przypisanych tagów.</p>";
                                                 }else{
                                                     foreach($this->c_tags as $tag){
                                             ?>                                            

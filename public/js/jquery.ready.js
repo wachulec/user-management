@@ -90,13 +90,30 @@ $(function(){
             $('#tags_input_tagsinput .tag').each(function(index, item){
                 str+=$(item).children().html().substring(0,$(item).children().html().indexOf('&nbsp;'))+'.';
             });
-            data='data='+str.substring(0,str.length-1);
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: data
-                //beforeSend, error, success, complete - do wypełnienia
-            });
+            if(str.length!=0){
+                data='data='+str.substring(0,str.length-1);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    success: function(obj) {
+                        $.each(obj,function(index,item){
+                            $('p.lack_of_tags').remove();
+                            $('.tags_box').append('<span class="tag"><span>'+item+'&nbsp;&nbsp;</span></span>');                            
+                        });
+                        $('#tags_input_tagsinput span.tag').remove();
+                        //alert('Operacja dodawania tagów zakończona pomyślnie! Odśwież przeglądarkę!');
+                    },
+                    error: function() {
+                        alert('Coś poszło nie tak! Powiedz Wachowi...');
+                    },
+                    complete: function() {
+                    }
+                    //beforeSend, error, success, complete - do wypełnienia
+                });
+            }else{
+                alert("Nie podano nazwy!");
+            }
             //1. wysłanie danych do skryptu
             //2. odebranie danych z powrotem i wpisanie ich do diva z tagami
             //3. wyczyszczenie tags_input_tagsinput z tagów

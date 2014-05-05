@@ -6,7 +6,6 @@
             <file>file:/C:/xampp/htdocs/user-management/application/views/scripts/customers/list.phtml</file>
             <file>file:/C:/xampp/htdocs/user-management/application/views/scripts/customers/edit.phtml</file>
             <file>file:/C:/xampp/htdocs/user-management/application/forms/EditCustomer.php</file>
-            <file>file:/C:/xampp/htdocs/user-management/application/views/scripts/customers/updatetags.phtml</file>
             <file>file:/C:/xampp/htdocs/user-management/application/views/scripts/customers/details.phtml</file>
             <file>file:/C:/xampp/htdocs/user-management/application/views/scripts/customers/table.phtml</file>
             <file>file:/C:/xampp/htdocs/user-management/application/models/DbTable/CustomersHasTags.php</file>

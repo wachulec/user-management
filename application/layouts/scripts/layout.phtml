@@ -77,6 +77,11 @@
 	<script src="<?php echo $this->baseUrl("js/jquery.ready.js"); ?>"></script>
 </head>
 <body>
+    <!-- //preloader www - pojawiający się znacznik ładowania podczas oczekiwania na stronę -->
+    <div id="preloader">
+	<div id="image"></div>
+    </div>
+    <!-- //preloader -->
     <div class="container_16">
         <header>
             <?= $this->render('header.phtml') ?>

@@ -20,12 +20,12 @@ class CustomersController extends Zend_Controller_Action
     {
         //jeśli wybrano konkretnego klienta
         $this->view->title="Szczegóły";
-        $Customer=new Application_Model_DbTable_Customers();
-        //pobieranie danych dla wszystkich...
-        $this->view->customers=$Customer->fetchAll();
-        //...dla konkretnego rekordu
+        $Customers=new Application_Model_DbTable_Customers();
         $customer_id=$this->getRequest()->getParam('customers_id');
-        $this->view->customer=$this->view->customers->getRow($customer_id-1);
+        $query=$Customers->select()->where("customers_id=?",$customer_id);
+        $this->view->customer=$Customers->fetchRow($query);
+        $this->view->customers=$Customers->fetchAll();
+               
         $rowsArray=$this->view->customer->findDependentRowset('Application_Model_DbTable_CustomersHasTags')->toArray();        
         $c_tags=array();
         foreach($rowsArray as $row){
@@ -33,8 +33,6 @@ class CustomersController extends Zend_Controller_Action
         }
         $this->view->c_tags=$c_tags;      
         $this->view->tags_update_url=$this->view->url(['action'=>'updatetags','customer_id'=>$customer_id]);
-        
-        
     }
 
     public function editAction()
@@ -79,7 +77,7 @@ class CustomersController extends Zend_Controller_Action
     }
 
     public function updatetagsAction()
-    { 
+    {
         //blokuje Layout żeby móc klorzystać z jsona
         $this->getHelper('Layout')->disableLayout();
         $this->getHelper('ViewRenderer')->setNoRender();       
@@ -130,8 +128,45 @@ class CustomersController extends Zend_Controller_Action
         }else{
             throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu wybranego klienta', 404);
         }
+        
     }
+
+    public function createformAction()
+    {
+        $this->view->title="Dodaj nowego klienta";
+        $this->view->form=new Application_Form_EditCustomer();
+        $url=$this->view->url(['action'=>'create']);
+        $this->view->form->setAction($url);
+    }
+
+    public function createAction()
+    {
+        $this->getHelper('Layout')->disableLayout();
+        $this->getHelper('ViewRenderer')->setNoRender();     
+        if($this->getRequest()->isPost()){
+            $form=new Application_Form_EditCustomer();
+            if($form->isValid($this->getRequest()->getPost())) {
+                /*dane z formularza pobieram do $data*/
+                $data=$form->getValues();
+                $Customers=new Application_Model_DbTable_Customers();
+                $customers_id=$Customers->insert($data);
+                return $this->_helper->redirector(
+                        'edit','customers',null,['customers_id'=>$customers_id]
+                        );/*akca, kontroler, ?, parametry*/
+            }
+            /*formularz wraca do widoku akcji, jeśli nie przejdzie walidacji*/
+            $this->view->form=$form;
+        }else{
+            throw new Zend_Controller_Action_Exception('Błedny adres!', 404);
+        }
+    }
+
+
 }
+
+
+
+
 
 
 

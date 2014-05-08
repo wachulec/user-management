@@ -1,4 +1,4 @@
-<ul class="sf-menu" id="navigationTop">
+<ul class="sf-menu sf-js-enabled sf-shadow" id="navigationTop">
     <li>
         <a href="<?php echo $this->url(array(),"index"); ?>">Pulpit</a>
     </li>
@@ -6,7 +6,10 @@
     <!--<li>
         <a href="<?php echo $this->url(array(),"events"); ?>">Szkolenia</a>
     </li>-->
-    <li>
-        <a href="<?php echo $this->url(array(),"customers"); ?>">Klienci</a>
+    <li class="selected">
+        <a href="<?php echo $this->url(array(),"customers"); ?>" >Klienci</a>
+        <ul>
+            <li><a href="<?php echo $this->url(array("controller"=>"Customers","action"=>"createform"),"default"); ?>">Dodaj nowego</a></li>
+        </ul>
     </li>
 </ul>

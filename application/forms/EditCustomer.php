@@ -21,7 +21,7 @@ class Application_Form_EditCustomer extends Zend_Form
         $this->addElement('text','postcode',['label'=>'Kod pocztowy:']);
         $this->addElement('text','province',['label'=>'Województwo:']);
         
-        $this->addElement('submit','submit',['label'=>'Aktualizuj']);
+        $this->addElement('submit','submit',['label'=>'Zapisz']);
     }
 
 

@@ -144,3 +144,23 @@ a:hover { color: #FF5E99; text-decoration:none;}
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3{ page-break-after: avoid; }
 }
+
+/*loader - w oczekiwaniu na załadowanie strony*/
+#preloader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.7);
+	z-index: 10;
+}
+#preloader #image {
+	width: 120px;
+	height: 120px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	background: url('../img/preloaderCOPY.gif') no-repeat center;
+	margin: -60px 0 0 -60px;
+}

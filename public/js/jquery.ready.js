@@ -114,10 +114,11 @@ $(function(){
             }else{
                 alert("Nie podano nazwy!");
             }
-            //1. wysłanie danych do skryptu
-            //2. odebranie danych z powrotem i wpisanie ich do diva z tagami
-            //3. wyczyszczenie tags_input_tagsinput z tagów
-            //console.log(data.substring(0,data.length-1));
+        });
+        
+        $(window).load(function() { // Czekamy na załadowanie całej zawartości strony
+            $("#preloader #image").fadeOut(); // Usuwamy grafikę ładowania
+            $("#preloader").delay(350).fadeOut("fast"); // Usuwamy diva przysłaniającego stronę
         });
 
 });

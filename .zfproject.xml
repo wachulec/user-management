@@ -29,6 +29,8 @@
           <actionMethod actionName="edit"/>
           <actionMethod actionName="update"/>
           <actionMethod actionName="updatetags"/>
+          <actionMethod actionName="createform"/>
+          <actionMethod actionName="create"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
@@ -84,6 +86,12 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Customers">
             <viewScriptFile forActionName="updatetags"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Customers">
+            <viewScriptFile forActionName="createform"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Customers">
+            <viewScriptFile forActionName="create"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

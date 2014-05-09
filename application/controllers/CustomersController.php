@@ -5,6 +5,7 @@ class CustomersController extends Zend_Controller_Action
 
     public function init()
     {
+        $this->view->controllerName=Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
         /* Initialize action controller here */
     }
 
@@ -33,6 +34,7 @@ class CustomersController extends Zend_Controller_Action
         }
         $this->view->c_tags=$c_tags;      
         $this->view->tags_update_url=$this->view->url(['action'=>'updatetags','customer_id'=>$customer_id]);
+        $this->view->tags_remove_url=$this->view->url(['action'=>'removetags','customer_id'=>$customer_id]);
     }
 
     public function editAction()
@@ -71,9 +73,8 @@ class CustomersController extends Zend_Controller_Action
                         );
             }
             $this->view->form=$form;
-        }else{
-            throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu wybranego klienta', 404);
-        }
+        }else{throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu wybranego klienta', 404);}
+            
     }
 
     public function updatetagsAction()
@@ -125,9 +126,7 @@ class CustomersController extends Zend_Controller_Action
             }
             //zwaracam wyniki w formacie json w zapytaniu ajax w obsłudze kliknięcia linku #dialog_link (jquery.ready.js)
             echo json_encode($addedTags);
-        }else{
-            throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu wybranego klienta', 404);
-        }
+        }else{throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu wybranego klienta', 404);}
         
     }
 
@@ -156,13 +155,63 @@ class CustomersController extends Zend_Controller_Action
             }
             /*formularz wraca do widoku akcji, jeśli nie przejdzie walidacji*/
             $this->view->form=$form;
-        }else{
+        }else{throw new Zend_Controller_Action_Exception('Błedny adres!', 404);}
+    }
+
+    public function deleteAction()
+    {
+        $this->getHelper('Layout')->disableLayout();
+        $this->getHelper('ViewRenderer')->setNoRender();       
+                
+        $customers_id=$this->getRequest()->getParam('customers_id');
+        $Customers=new Application_Model_DbTable_Customers();
+        $obj=$Customers->find($customers_id)->current();
+        if(!$obj) {
             throw new Zend_Controller_Action_Exception('Błedny adres!', 404);
         }
+        $obj->delete();
+        return $this->_helper->redirector('list');
+    }
+
+    public function removetagsAction()
+    {
+        $this->getHelper('Layout')->disableLayout();
+        $this->getHelper('ViewRenderer')->setNoRender();       
+        $this->getResponse()->setHeader('Content-Type', 'application/json');
+        
+        $customer_id=$this->getRequest()->getParam('customers_id');
+        $Customer=new Application_Model_DbTable_Customers();
+        $obj=$Customer->find($customer_id)->current();
+        if(!$obj){
+            throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu dla wybranego klienta!', 404);
+        }
+        
+        if($this->getRequest()->isPost()) {
+            
+            $tag=trim($this->getRequest()->getParam('tag'));
+            $Tags=new Application_Model_DbTable_Tags();
+            $query=$Tags->select()->where('name LIKE ?',$tag);
+            $result=$Tags->fetchRow($query);
+            if($result!=null){
+                $tags_id=$result->tags_id;            
+                $CustomersHasTags=new Application_Model_DbTable_CustomersHasTags();            
+                $CustomersHasTags->delete(
+                        [
+                            'tag_id=?'=>$tags_id,
+                            'customer_id=?'=>$customer_id
+                        ]
+                    );
+            }
+        }else{throw new Zend_Controller_Action_Exception('Błędny adres. Brak rekordu wybranego klienta', 404);}
+        
     }
 
 
 }
+
+
+
+
 
 
 

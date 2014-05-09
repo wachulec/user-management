@@ -17,13 +17,15 @@
 	width:			100%;
 }
 
-/*.sf-menu li.selected{
-	background: url("../img/plus_g.png") #f4f4f4 no-repeat 96% 50%;
-}*/
 .sf-menu li.selected{
-	background: #f4f4f4 no-repeat 96% 50%;
+	background-color: #f4f4f4;
 }
 
+.sf-menu li.sf-link{
+        background-image: url("../img/plus_g.png");
+        background-position: 96% 50%;
+        background-repeat: no-repeat;
+}
 
 .sf-menu li:hover {
 	visibility:		inherit; /* fixes IE7 'sticky bug' */

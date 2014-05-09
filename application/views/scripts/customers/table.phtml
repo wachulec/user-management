@@ -5,27 +5,36 @@
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
         <thead>
             <tr>
-                <th width="5%">Lp.</th>
-                <th width="2%">Więcej</th>
+                <th width="5%">ID</th>
                 <th>Nazwisko</th>
                 <th>Imię</th>
                 <th>email</th>
                 <th>Telefon</th>
+                <th width="2%">Więcej</th>
+                <th width="2%">Edytuj</th>
+                <th width="2%">Usuń</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th>Lp.</th>
+                <th>ID</th>
                 <th>Imię</th>
                 <th>Nazwisko</th>
                 <th>email</th>
                 <th>Telefon</th>
+                <th width="2%">Więcej</th>
+                <th width="2%">Edytuj</th>
+                <th width="2%">Usuń</th>
         </tfoot>
         <tbody>
             <?php foreach($this->customers as $customer){ ?>
             <tr>
                 <td class="center"><?= $customer['customers_id']; ?></td>
-                <td class="icons ui-state-default ui-corner-all center" title="Pokaż szczegóły">
+                <td><?= $customer['lastname'] ?></td>
+                <td><?= $customer['firstname'] ?></td>
+                <td><?= $customer['email'] ?></td>
+                <td><?= $customer['phone'] ?></td>
+                <td class="icons ui-state-default ui-corner-all center" title="Pokaż szczegóły <?= $customer['firstname']." ".$customer['lastname'] ?>">
                     <a href="<?= 
                             $this->url(
                                     array(
@@ -35,14 +44,43 @@
                                     ),
                                     'default'
                                 )
-                        ?>"><span style="position: relative; left: 30%" class="ui-icon ui-icon-search"></span></a>
+                        ?>"><span style="position: relative; left: 30%" class="ui-icon ui-icon-search"></span>
+                    </a>
                 </td>
-                <td><?= $customer['lastname'] ?></td>
-                <td><?= $customer['firstname'] ?></td>
-                <td><?= $customer['email'] ?></td>
-                <td><?= $customer['phone'] ?></td>
+                <td class="icons ui-state-default ui-corner-all center" title="Edytuj dane <?= $customer['firstname']." ".$customer['lastname'] ?>">
+                    <a href="<?= 
+                            $this->url(
+                                    array(
+                                        'controller'=>'customers',
+                                        'action'=>'edit',
+                                        'customers_id'=>$customer['customers_id']
+                                    ),
+                                    'default'
+                                )
+                        ?>"><span style="position: relative; left: 30%" class="ui-icon ui-icon-gear"></span>
+                    </a>
+                </td>
+                <td class="icons ui-state-default ui-corner-all center" title="Usuń <?= $customer['firstname']." ".$customer['lastname'] ?> z bazy">
+                    <a id="delete-link" href="<?= 
+                            $this->url(
+                                    array(
+                                        'controller'=>'customers',
+                                        'action'=>'delete',
+                                        'customers_id'=>$customer['customers_id']
+                                    ),
+                                    'default'
+                                )
+                        ?>">
+                        <span style="position: relative; left: 30%" class="ui-icon ui-icon-trash"></span>
+                    </a>
+                </td>
             </tr>
             <?php }//koniec pętli ?>
         </tbody>
     </table>
+</div>
+<!-- dialog z ostrzeżeniem przed usunięciem -->
+<div id="del-dialog" title="Usuwanie rekordu">
+    <p><span style="color: red;"><strong>UWAGA!</strong></span></p>
+    <p>Czy na pewno chcesz usunąć tego klienta? Operacja jest <strong>nieodwracalna</strong>!</p>
 </div>

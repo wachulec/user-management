@@ -83,7 +83,7 @@
                                                 }else{
                                                     foreach($this->c_tags as $tag){
                                             ?>                                            
-                                                    <span class="tag"><span><?= $tag ?>&nbsp;&nbsp;</span></span>
+                                                        <span class="tag"><span><?= $tag ?>&nbsp;&nbsp;</span><a class="removing-tag" href="#" title="Removing tag">x</a></span>
                                             <?php
                                                     }//end foreach
                                                 }//end else
@@ -94,6 +94,7 @@
                                         <div class="column_content">
                                             <label><strong>Dodaj tagi: </strong></label>
                                             <input type="hidden" id="tags_update_url" name="tags_update_url" value="<?= $this->tags_update_url; ?>" />
+                                            <input type="hidden" id="tags_remove_url" name="tags_remove_url" value="<?= $this->tags_remove_url; ?>" />
                                             <input type="text" name="tags" id="tags_input" value="" />
                                         </div>
                                     </div>

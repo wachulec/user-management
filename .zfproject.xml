@@ -31,6 +31,8 @@
           <actionMethod actionName="updatetags"/>
           <actionMethod actionName="createform"/>
           <actionMethod actionName="create"/>
+          <actionMethod actionName="delete"/>
+          <actionMethod actionName="removetags"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
@@ -92,6 +94,12 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Customers">
             <viewScriptFile forActionName="create"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Customers">
+            <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Customers">
+            <viewScriptFile forActionName="removetags"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

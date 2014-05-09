@@ -1,15 +1,17 @@
 <ul class="sf-menu sf-js-enabled sf-shadow" id="navigationTop">
-    <li>
-        <a href="<?php echo $this->url(array(),"index"); ?>">Pulpit</a>
+    <li class="<?= (strtolower($this->controllerName)=='index'?'selected':'') ?>">
+        <a href="<?= $this->url(array(),"index"); ?>">Pulpit</a>
     </li>
      <!-- class="selected" - zaznaczona aktualna zakładka menu -->
     <!--<li>
-        <a href="<?php echo $this->url(array(),"events"); ?>">Szkolenia</a>
+        <a href="<?= $this->url(array(),"events"); ?>">Szkolenia</a>
     </li>-->
-    <li class="selected">
-        <a href="<?php echo $this->url(array(),"customers"); ?>" >Klienci</a>
+    <li class="sf-link <?= (strtolower($this->controllerName)=='customers'?'selected':'') ?>">
+        <a class="sf-with-ul" href="<?= $this->url(array(),"customers"); ?>" >Klienci</a>
+        <span class="sf-sub-indicator"> »</span>
         <ul>
-            <li><a href="<?php echo $this->url(array("controller"=>"Customers","action"=>"createform"),"default"); ?>">Dodaj nowego</a></li>
+            <li><a class="sf-with-ul" href="<?= $this->url(array(),"customers"); ?>" >Wyświetl wszystkich</a></li>
+            <li><a href="<?= $this->url(array("controller"=>"customers","action"=>"createform"),"default"); ?>">Dodaj nowego</a></li>
         </ul>
     </li>
 </ul>

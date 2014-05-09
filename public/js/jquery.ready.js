@@ -7,9 +7,10 @@ $(function(){
                         console.log("%s was toggled.", $(this).find(">span").text());
                 }
         });
+        
 
         // menu superfish
-        //$('#navigationTop').superfish();
+        $('#navigationTop').superfish();
 
         // tags
         $("#tags_input").tagsInput();
@@ -36,22 +37,26 @@ $(function(){
 
 
         // Dialog			
-        $('#dialog').dialog({
+        $('#del-dialog').dialog({
                 autoOpen: false,
-                width: 600,
+                width: 300,
                 buttons: {
                         "Ok": function() { 
-                                $(this).dialog("close"); 
+                                $('#preloader').css('display', 'none');
+                                $(this).dialog("close");
+                                window.location.href=$('#delete-link').attr('href');
                         }, 
-                        "Cancel": function() { 
-                                $(this).dialog("close"); 
+                        "Anuluj": function() { 
+                                $('#preloader').css('display', 'none');
+                                $(this).dialog("close");
                         } 
                 }
         });
 
         // Dialog Link
-        $('#dialog_link').click(function(){
-                $('#dialog').dialog('open');
+        $('#delete-link').click(function(){
+                $('#preloader').css('display', 'block');
+                $('#del-dialog').dialog('open');
                 return false;
         });
 
@@ -99,10 +104,28 @@ $(function(){
                     success: function(obj) {
                         $.each(obj,function(index,item){
                             $('p.lack_of_tags').remove();
-                            $('.tags_box').append('<span class="tag"><span>'+item+'&nbsp;&nbsp;</span></span>');                            
+                            $('.tags_box').append('<span class="tag"><span>'+item+'&nbsp;&nbsp;</span><a class="removing-tag" href="#" title="Removing tag">x</a></span>');                            
                         });
                         $('#tags_input_tagsinput span.tag').remove();
-                        //alert('Operacja dodawania tagów zakończona pomyślnie! Odśwież przeglądarkę!');
+                        $('.removing-tag').click(function(){
+                            var tag=$(this).parent().children('span').html();
+                            var data='tag='+tag;
+                            var url=$('#tags_remove_url').val();
+                            var html_tag=$(this).parent();
+                            $.ajax({
+                                    type: "POST",
+                                    url: url,
+                                    data: data,
+                                    success: function() {
+                                        html_tag.remove();
+                                    },
+                                    error: function() {alert('Coś poszło nie tak! Powiedz Wachowi...');
+                                    },
+                                    complete: function() {
+                                    }
+                                    //beforeSend, error, success, complete - do wypełnienia
+                                });
+                        });
                     },
                     error: function() {
                         alert('Coś poszło nie tak! Powiedz Wachowi...');
@@ -116,9 +139,30 @@ $(function(){
             }
         });
         
+        
+        /*ikonka ładowania strony*/
         $(window).load(function() { // Czekamy na załadowanie całej zawartości strony
             $("#preloader #image").fadeOut(); // Usuwamy grafikę ładowania
             $("#preloader").delay(350).fadeOut("fast"); // Usuwamy diva przysłaniającego stronę
         });
-
+        
+        $('.removing-tag').click(function(){
+            var tag=$(this).parent().children('span').html();
+            var data='tag='+tag;
+            var url=$('#tags_remove_url').val();
+            var html_tag=$(this).parent();
+            $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    success: function() {
+                        html_tag.remove();
+                    },
+                    error: function() {alert('Coś poszło nie tak! Powiedz Wachowi...');
+                    },
+                    complete: function() {
+                    }
+                    //beforeSend, error, success, complete - do wypełnienia
+                });
+        });
 });

@@ -164,3 +164,8 @@ a:hover { color: #FF5E99; text-decoration:none;}
 	background: url('../img/preloaderCOPY.gif') no-repeat center;
 	margin: -60px 0 0 -60px;
 }
+
+/*usunięcie close-bar w dialog jquery ui*/
+.ui-dialog-titlebar-close {
+  visibility: hidden;
+}

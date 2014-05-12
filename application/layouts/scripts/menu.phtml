@@ -14,4 +14,7 @@
             <li><a href="<?= $this->url(array("controller"=>"customers","action"=>"createform"),"default"); ?>">Dodaj nowego</a></li>
         </ul>
     </li>
+    <li class="<?= (strtolower($this->controllerName)=='calendar'?'selected':'') ?>">
+        <a href="<?= $this->url(array(),"calendar"); ?>">Kalendarz</a>
+    </li>
 </ul>

@@ -34,6 +34,9 @@
           <actionMethod actionName="delete"/>
           <actionMethod actionName="removetags"/>
         </controllerFile>
+        <controllerFile controllerName="Calendar">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="EditCustomer"/>
@@ -100,6 +103,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Customers">
             <viewScriptFile forActionName="removetags"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Calendar">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

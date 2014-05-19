@@ -1,0 +1,10 @@
+INSERT INTO customers (firstname,lastname,email,phone) VALUES('Marcin','Wachulec','wachu2k@gmail.com','48675849556');
+INSERT INTO customers (firstname,lastname,email,phone) VALUES('Marek','Kowalski','wachu2k@gmail.com','48675849556');
+INSERT INTO customers (firstname,lastname,email,phone) VALUES('Dominik','Alexandrowicz','wachu2k@gmail.com','48675849556');
+INSERT INTO customers (firstname,lastname,email,phone) VALUES('Marcin','Pawelec','wachu2k@gmail.com','48675849556');
+INSERT INTO customers (firstname,lastname,email,phone) VALUES('Aneta','Tucznio','wachu2k@gmail.com','48675849556');
+INSERT INTO customers (firstname,lastname,email,phone) VALUES('Kasia','Andruszkiewicz','wachu2k@gmail.com','48675849556');
+INSERT INTO customers (firstname,lastname,email,phone) VALUES('Tomek','Tryczyński','wachu2k@gmail.com','48675849556');
+INSERT INTO customers (firstname,lastname,email,phone) VALUES('Marcin','Wawelec','wachu2k@gmail.com','48675849556');
+INSERT INTO customers (firstname,lastname,email,phone) VALUES('Tomek','Tryczek','wachu2k@gmail.com','48675849556');
+INSERT INTO customers (firstname,lastname,email,phone) VALUES('Kamil','Tylutki','wachu2k@gmail.com','48675849556');

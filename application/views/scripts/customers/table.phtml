@@ -61,7 +61,7 @@
                     </a>
                 </td>
                 <td class="icons ui-state-default ui-corner-all center" title="Usuń <?= $customer['firstname']." ".$customer['lastname'] ?> z bazy">
-                    <a id="delete-link" href="<?= 
+                    <a id="delete-link-<?= $customer['customers_id'] ?>" class="delete-button" href="<?= 
                             $this->url(
                                     array(
                                         'controller'=>'customers',
@@ -83,4 +83,5 @@
 <div id="del-dialog" title="Usuwanie rekordu">
     <p><span style="color: red;"><strong>UWAGA!</strong></span></p>
     <p>Czy na pewno chcesz usunąć tego klienta? Operacja jest <strong>nieodwracalna</strong>!</p>
+    <input value="" type="hidden" id="delete-link-id"/>
 </div>

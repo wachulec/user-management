@@ -69,7 +69,7 @@ class CustomersController extends Zend_Controller_Action
                 $obj->setFromArray($data);
                 $obj->save();
                 return $this->_helper->redirector(
-                        'edit','customers',null,array('customers_id'=>$customer_id)
+                        'details','customers',null,array('customers_id'=>$customer_id)
                         );
             }
             $this->view->form=$form;
@@ -150,7 +150,7 @@ class CustomersController extends Zend_Controller_Action
                 $Customers=new Application_Model_DbTable_Customers();
                 $customers_id=$Customers->insert($data);
                 return $this->_helper->redirector(
-                        'edit','customers',null,['customers_id'=>$customers_id]
+                        'details','customers',null,['customers_id'=>$customers_id]
                         );/*akca, kontroler, ?, parametry*/
             }
             /*formularz wraca do widoku akcji, jeśli nie przejdzie walidacji*/

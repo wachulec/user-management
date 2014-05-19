@@ -44,7 +44,8 @@ $(function(){
                 "Ok": function() { 
                     $('#preloader').remove();
                     $(this).dialog("close");
-                    window.location.href=$('#delete-link').attr('href');
+                    console.log('.'+$('#delete-link-id').val());
+                    window.location.href=$('#'+$('#delete-link-id').val()).attr('href');
                 }, 
                 "Anuluj": function() { 
                     $('#preloader').remove();
@@ -52,12 +53,12 @@ $(function(){
                 } 
             }
         });
-
-        // Dialog Link
-        $('#delete-link').click(function(){
-                $('<div></div>').attr('id','preloader').appendTo('body');
-                $('#del-dialog').dialog('open');
-                return false;
+        
+        $('.delete-button').click(function(){
+            $('<div></div>').attr('id','preloader').appendTo('body');
+            $('#delete-link-id').val($(this).attr("id"));
+            $('#del-dialog').dialog('open');
+            return false;            
         });
 
         // Datepicker
@@ -136,7 +137,7 @@ $(function(){
             }); // Usuwamy diva przysłaniającego stronę
         });
         
-        $('body').delegate('.removing-tag',"click",function(){
+        $('body').delegate(".removing-tag","click",function(){
             var tag=$(this).parent().children('span').html();
             var data='tag='+tag;
             var url=$('#tags_remove_url').val();
@@ -177,7 +178,7 @@ $(function(){
             },
             editable: true,
             selectable: true,
-            selectHelper: true,
+            selectHelper: true,/*
             select: function(start, end, allDay) {
                     var title = prompt('Nazwa wydarzenia:');
                     if (title) {
@@ -192,7 +193,7 @@ $(function(){
                             );
                     }
                     calendar.fullCalendar('unselect');
-            },
+            },*/
             events: [
                     {
                             title: 'All Day Event',

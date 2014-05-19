@@ -5,8 +5,11 @@
         <group>
             <file>file:/C:/xampp/htdocs/user-management/application/configs/application.ini</file>
             <file>file:/C:/xampp/htdocs/user-management/application/controllers/CalendarController.php</file>
+            <file>file:/C:/xampp/htdocs/user-management/application/views/scripts/customers/table.phtml</file>
             <file>file:/C:/xampp/htdocs/user-management/application/views/scripts/calendar/index.phtml</file>
             <file>file:/C:/xampp/htdocs/user-management/public/css/fullcalendar.css</file>
+            <file>file:/C:/xampp/htdocs/user-management/docs/eventsTest.sql</file>
+            <file>file:/C:/xampp/htdocs/user-management/docs/customersTest.sql</file>
             <file>file:/C:/xampp/htdocs/user-management/public/css/style.css</file>
             <file>file:/C:/xampp/htdocs/user-management/application/controllers/CustomersController.php</file>
             <file>file:/C:/xampp/htdocs/user-management/application/layouts/scripts/layout.phtml</file>
